@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+body {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  font-family: Arial, sans-serif;
+}
+
+.bot-image {
+  width: 250px;
+  max-width: 90%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.play-btn {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.play-btn:hover {
+  background-color: #1557b0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<img class="bot-image" src="bot.jpg" alt="Derivatives Bot">
+
+<audio id="myAudio" src="song.mp3"></audio>
+
+<button class="play-btn" onclick="toggleAudio()">
+  <span id="icon">▶</span>
+  <span id="text">Play Audio</span>
+</button>
+
+<script>
+
+var audio = document.getElementById("myAudio");
+var icon = document.getElementById("icon");
+var text = document.getElementById("text");
+
+function toggleAudio() {
+
+  if (audio.paused) {
+
+    audio.play();
+
+    icon.innerText = "⏸";
+    text.innerText = "Pause";
+
+  } else {
+
+    audio.pause();
+
+    icon.innerText = "▶";
+    text.innerText = "Play Audio";
+
+  }
+
+}
+
+audio.onended = function() {
+
+  icon.innerText = "▶";
+  text.innerText = "Play Audio";
+
+};
+
+</script>
+
+</body>
+</html>
