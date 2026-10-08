@@ -1,95 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 
 <style>
+  body {
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    font-family: Arial, sans-serif;
+  }
 
-body {
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  font-family: Arial, sans-serif;
-}
+  .bot-image {
+    width: 250px;
+    max-width: 90%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+  }
 
-.bot-image {
-  width: 250px;
-  max-width: 90%;
-  border-radius: 15px;
-  margin-bottom: 15px;
-}
+  .play-btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
 
-.play-btn {
-  background-color: #1a73e8;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 25px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: sans-serif;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.play-btn:hover {
-  background-color: #1557b0;
-}
-
+  .play-btn:hover {
+    background-color: #1557b0;
+  }
 </style>
-
 </head>
 
 <body>
 
-<img class="bot-image" src="bot.jpg" alt="Derivatives Bot">
+<img class="bot-image" src="bot.jpg.jpg" alt="Derivatives Bot">
 
-<audio id="myAudio" src="song.mp3"></audio>
+<audio id="myAudio">
+  <source src="song.mp3.mp3" type="audio/mpeg">
+  Your browser does not support audio.
+</audio>
 
-<button class="play-btn" onclick="toggleAudio()">
+<button class="play-btn" id="playButton">
   <span id="icon">▶</span>
   <span id="text">Play Audio</span>
 </button>
 
 <script>
+  const audio = document.getElementById("myAudio");
+  const button = document.getElementById("playButton");
+  const icon = document.getElementById("icon");
+  const text = document.getElementById("text");
 
-var audio = document.getElementById("myAudio");
-var icon = document.getElementById("icon");
-var text = document.getElementById("text");
+  button.addEventListener("click", function() {
 
-function toggleAudio() {
+    if (audio.paused) {
 
-  if (audio.paused) {
+      audio.play()
+        .then(function() {
+          icon.textContent = "⏸";
+          text.textContent = "Pause";
+        })
+        .catch(function(error) {
+          console.error("Audio error:", error);
+          text.textContent = "Audio Error";
+        });
 
-    audio.play();
+    } else {
 
-    icon.innerText = "⏸";
-    text.innerText = "Pause";
+      audio.pause();
+      icon.textContent = "▶";
+      text.textContent = "Play Audio";
 
-  } else {
+    }
 
-    audio.pause();
+  });
 
-    icon.innerText = "▶";
-    text.innerText = "Play Audio";
-
-  }
-
-}
-
-audio.onended = function() {
-
-  icon.innerText = "▶";
-  text.innerText = "Play Audio";
-
-};
-
+  audio.addEventListener("ended", function() {
+    icon.textContent = "▶";
+    text.textContent = "Play Audio";
+  });
 </script>
 
 </body>
